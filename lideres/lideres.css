@@ -1,0 +1,121 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    background: linear-gradient(135deg, rgba(25, 25, 25, 0.9), rgba(50, 50, 50, 0.9)), url('images/background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #f1f1f1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo img {
+    height: 60px;
+}
+
+h1 {
+    text-align: center;
+    margin: 40px 0;
+    color: #ffffff;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+    font-size: 2.5em;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Ajuste o mínimo para 250px */
+    gap: 20px; /* Reduzi a distância entre os cards */
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    border-bottom: 5px solid #ffffff;
+    transition: transform 0.5s;
+}
+
+.card img:hover {
+    transform: scale(1.1);
+}
+
+.patente {
+    color: #ffcc00;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+    padding: 20px;
+    color: #f1f1f1;
+}
+
+footer p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em; /* Ajuste para telas menores */
+        margin: 20px 0; /* Menos espaço em cima e embaixo */
+    }
+
+    .grid {
+        padding: 10px; /* Ajuste de padding em telas menores */
+    }
+
+    .card {
+        margin: 10px; /* Margem entre cartas em telas menores */
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.5em; /* Reduzindo ainda mais o tamanho do texto em telas muito pequenas */
+    }
+
+    .grid {
+        grid-template-columns: 1fr; /* Uma coluna em telas muito pequenas */
+    }
+
+    .card {
+        margin: 5px; /* Ajuste de margem */
+    }
+}

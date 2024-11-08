@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Veículos</title>
+    <link rel="stylesheet" href="static/veiculos.css">
+    <script>
+        function confirmRemoval(event) {
+            if (!confirm("Tem certeza que deseja remover este veículo?")) {
+                event.preventDefault(); // Impede o envio do formulário se o usuário cancelar
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Registro de Veículos</h1>
+    
+    {% if current_user.is_authenticated %}
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="modelo">Modelo:</label>
+            <input type="text" name="modelo" required>
+            
+            <label for="preco">Preço:</label>
+            <input type="text" name="preco" required>
+            
+            <label for="imagem">Imagem:</label>
+            <input type="file" name="imagem" accept="image/*" required>
+            
+            <button type="submit">Cadastrar</button>
+        </form>
+    {% else %}
+        <p>Você precisa estar logado para cadastrar um veículo.</p>
+        <a href="{{ url_for('login') }}"><button>Login</button></a>
+        <a href="{{ url_for('register') }}"><button>Registrar</button></a>
+    {% endif %}
+
+    <h2>Veículos Cadastrados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Modelo</th>
+                <th>Preço</th>
+                <th>Imagem</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for veiculo in veiculos %}
+            <tr>
+                <td>{{ veiculo.modelo }}</td>
+                <td>{{ veiculo.preco }}</td>
+                <td>
+                    <img src="{{ url_for('uploaded_file', filename=veiculo.imagem.split('/')[-1]) }}" alt="Imagem de {{ veiculo.modelo }}" style="width:100px;height:auto;">
+                </td>
+                <td>
+                    <form action="{{ url_for('remover', veiculo_id=veiculo.id) }}" method="post" onsubmit="confirmRemoval(event)">
+                        <button type="submit">Remover</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
